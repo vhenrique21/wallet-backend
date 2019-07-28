@@ -2,7 +2,6 @@
   "name": "wallet-backend",
   "version": "1.0.0",
   "description": "Serverless using Typescript",
-
   "scripts": {
     "start": "yarn run sls offline --stage dev",
     "start:staging": "yarn run sls offline --stage stage",
@@ -14,6 +13,9 @@
   },
   "dependencies": {
     "bluebird": "^3.5.5",
+    "@types/aws-serverless-express": "^3.3.1",
+    "@types/body-parser": "latest",
+    "@types/express": "latest",
     "path-to-regexp": "^3.0.0",
     "serverless": "^1.32.0",
     "serverless-offline": "^5.8.0",

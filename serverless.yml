@@ -13,11 +13,11 @@ provider:
   runtime: nodejs10.x
 
 functions:
-  hello-world:
-    handler: src/presentation/hello/_routes.handler
+  lambdaWallet:
+    handler: src/appHandler.handler
     events:
       - http:
-          path: hello/{proxy+}
+          path: /{proxy+}
           method: any
           cors: true
 
