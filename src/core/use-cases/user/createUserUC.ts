@@ -1,20 +1,15 @@
+import {createUser} from '../../data-sources/user'
 
-
-export const CreateUserUC = async (user: CreateUserModel) => {
-
-  console.log(user)
-
-  //TODO: Create User
-
+export const CreateUserUC = async (user: UserModel) => {
+  return  await createUser(user)
 }
 
-
-export interface CreateUserModel {
+export interface UserModel {
   name: string
   email: string
-  birthDay: Date
+  birthday: Date
   username: string
-  password: string
+  password?: string
   bankToken: string
 }
 

@@ -1,11 +1,8 @@
+import {authorizeByCredentials} from '../../data-sources/authorizer'
+
 export const AuthUserUC = async (user: AuthUserModel) => {
-
-  console.log(user)
-
-  //TODO: Auth User
-
+  return await authorizeByCredentials(user.username, user.password)
 }
-
 
 export interface AuthUserModel {
   username: string

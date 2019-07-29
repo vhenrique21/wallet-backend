@@ -1,7 +1,4 @@
-service:
-  name: wallet-backend
-#app: your-app-name
-#tenant: your-tenant-name
+service: wallet
 
 # Add the serverless-webpack plugin
 plugins:
@@ -9,15 +6,36 @@ plugins:
   - serverless-offline
 
 provider:
+  stage: ${opt:stage, 'dev'}
+  timeout: 30
+  memorySize: 128
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs8.x
 
 functions:
   lambdaWallet:
-    handler: src/appHandler.handler
+    handler: src/lambda.handler
     events:
       - http:
           path: /{proxy+}
           method: any
           cors: true
+
+
+resources:
+  Resources:
+    userTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        TableName: 'WalletUser'
+        AttributeDefinitions:
+          - AttributeName: username
+            AttributeType: S
+        KeySchema:
+          - AttributeName: username
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
 

@@ -1,15 +1,12 @@
-import {CreateUserModel, CreateUserUC} from '../../core/use-cases/user/createUserUC'
+import {UserModel, CreateUserUC} from '../../core/use-cases/user/createUserUC'
 
-export async function signupHandler(req, _res) {
+export async function signupHandler(req, res) {
   try {
-    const body = req.body
-
     //  TODO: UseCase to verify if the user already exits
 
-    await CreateUserUC(body as CreateUserModel)
-
-
+    const user = await CreateUserUC(req.body as UserModel)
+    return res.status(200).send(user)
   } catch (e) {
-
+    return res.status(500).send(e.message)
   }
 }
