@@ -6,23 +6,28 @@
     "start": "sls offline --stage dev",
     "start:staging": "sls offline --stage stage",
     "start:production": "sls offline --stage prod",
-    "start:debug": "SLS_DEBUG=* && node --inspect=9229 ./node_modules/.bin/serverless offline --stage dev",
+    "start:debug": "SLS_DEBUG=* && node --inspect=9229 ./node_modules/.bin/serverless offline --stage dev --disableTimeout",
     "deploy": "sls deploy --stage dev",
     "deploy:staging": "sls deploy --stage stage",
     "deploy:production": "sls deploy --stage prod"
   },
   "dependencies": {
+    "@hapi/joi": "latest",
+    "aws-lambda": "latest",
     "aws-sdk": "latest",
     "aws-serverless-express": "latest",
-    "aws-lambda": "latest",
     "bluebird": "latest",
     "body-parser": "latest",
+    "cors": "latest",
     "express": "latest",
     "jsonwebtoken": "latest",
     "lodash": "^4.17.15",
     "node": "^10.12.18",
+    "node-fetch": "latest",
     "osdynamo": "latest",
     "path-to-regexp": "latest",
+    "request": "^2.88.0",
+    "request-promise": "latest",
     "serverless": "latest",
     "serverless-offline": "latest",
     "serverless-plugin-typescript": "latest",
@@ -32,7 +37,7 @@
     "tslint": "latest",
     "typescript": "latest",
     "webpack": "latest",
-    "node-fetch": "latest"
+    "webpack-node-externals": "latest"
   },
   "devDependencies": {
     "@types/aws-lambda": "latest",
@@ -40,7 +45,7 @@
     "@types/express": "latest",
     "@types/node": "^8.10.51",
     "@types/node-fetch": "latest",
-    "webpack-node-externals": "latest"
+    "@types/hapi__joi": "^15.0.3"
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
   "license": "MIT"

@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import {verifyAuthByJWT} from './core/data-sources/authorizer'
-import {authHandler} from './presentation/user/authUser'
-import {signupHandler} from './presentation/user/resgisterUser'
+import {getBankAccountInfoHandler} from './presentation/bank/bank-account'
+import {authHandler} from './presentation/user/auth-user'
+import {signupHandler} from './presentation/user/resgister-user'
 import {helloWorldHandler} from './presentation/hello/hello-world'
 import * as bodyParser from 'body-parser'
 import * as awsServerlessExpressMiddleware from 'aws-serverless-express/middleware'
@@ -19,6 +20,26 @@ export const buildRouter = () => {
   router.post('/register', signupHandler)
   router.post('/auth', authHandler)
 
+  // router.get('/user', verifyAuthByJWT, (req, res) => { getUserInfoHandler(req, res) })
+
+  // router.get('/user/orders', verifyAuthByJWT, (req, res) => { getUserOrdersHandler(req, res) })
+  // router.post('/user/orders', verifyAuthByJWT, (req, res) => { registerUserOrdersHandler(req, res) })
+
+  // Bank Routes
+  // router.get('/investment', verifyAuthByJWT, (req, res) => { getInvestmentHandler(req, res) })
+  // router.get('/loans', verifyAuthByJWT, (req, res) => { getLoansHandler(req, res) })
+
+  router.get('/bank', verifyAuthByJWT, async (req, res) => { await getBankAccountInfoHandler(req, res) })
+
+  // router.post('/bank/transfer', verifyAuthByJWT, (req, res) => { makeTransferHandler(req, res) })
+  // router.post('/bank/pay', verifyAuthByJWT, (req, res) => { makePaymentHandler(req, res) })
+  // router.post('/bank/pay/card', verifyAuthByJWT, (req, res) => { makePaymentsWithCard(req, res) })
+  // router.post('/bank/pay/card/invoice', verifyAuthByJWT, (req, res) => { makeCardInvoicePaymentHandler(req, res) })
+
+  // router.get('/bank/card', verifyAuthByJWT, (req, res) => { getUserCardInfoHandler(req, res) })
+  // router.get('/bank/card/transfers', verifyAuthByJWT, (req, res) => { getCardTranfersInfo(req,res) })
+  // router.get('/bank/card/invoice', verifyAuthByJWT, (req, res) => { getAllCardInvoiceInfoHandler(req, res) })
+  // router.get('/user/card/invoice/:id', verifyAuthByJWT, (req, res) => { getCardInvoiceInfoHandler(req, res) })
 
   return router
 }

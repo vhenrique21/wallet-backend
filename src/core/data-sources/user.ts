@@ -11,7 +11,6 @@ export const createUser = async (userInput: UserModel) => {
     TableName: "WalletUser",
     Item: {
       ...userInput,
-      birthday: userInput.birthday,
       password: hash
     }
   }

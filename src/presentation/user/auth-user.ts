@@ -5,7 +5,6 @@ export async function authHandler(req, res) {
   try {
     const body = req.body
     const token = await AuthUserUC(body as AuthUserModel)
-    console.log(token)
     return res.status(200).send({
       token: token,
       message: 'User successfully retrieved'
