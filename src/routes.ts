@@ -6,6 +6,7 @@ import {signupHandler} from './presentation/user/resgister-user'
 import {helloWorldHandler} from './presentation/hello/hello-world'
 import * as bodyParser from 'body-parser'
 import * as awsServerlessExpressMiddleware from 'aws-serverless-express/middleware'
+import { getUserInfoHandler } from './presentation/user/user-info';
 
 export const buildRouter = () => {
   const router = Router()
@@ -20,7 +21,7 @@ export const buildRouter = () => {
   router.post('/register', signupHandler)
   router.post('/auth', authHandler)
 
-  // router.get('/user', verifyAuthByJWT, (req, res) => { getUserInfoHandler(req, res) })
+  router.get('/user', verifyAuthByJWT, (req, res) => { getUserInfoHandler(req, res) })
 
   // router.get('/user/orders', verifyAuthByJWT, (req, res) => { getUserOrdersHandler(req, res) })
   // router.post('/user/orders', verifyAuthByJWT, (req, res) => { registerUserOrdersHandler(req, res) })
