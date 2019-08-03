@@ -12,11 +12,14 @@ export async function signupHandler(req, res) {
       name: Joi.string().required()
     })
     // @ts-ignore
-    Joi.validate(req.body, schema, (err, value) => {
-      if (err){
-        return res.status(400).send(err.message)
+    const validation = Joi.validate(req.body, schema, (err, value) => {
+      if (err) {
+        return err.message
       }
+      return false
     })
+
+    if (validation) { return res.status(400).send(validation) }
 
     const verify = await getUserByUsername(req.body.username)
     if (verify.username) {
