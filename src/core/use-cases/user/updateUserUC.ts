@@ -10,9 +10,7 @@ export const UpdateUserUC = async (data: UpdateUserModel) => {
 
 export interface UpdateUserModel {
   username: string
-  banco1?: boolean
-  banco2?: boolean
-  banco3?: boolean
+  banks: string[]
   suitabilityResult?: Suitability
   maxBalanceValue?: number
   minEmergencyValue?: number

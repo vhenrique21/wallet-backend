@@ -2,39 +2,23 @@ import {getBankAccountInfoByBankToken} from '../../data-sources/bank'
 import {createUser} from '../../data-sources/user'
 
 export const CreateUserUC = async (user: CreateUserModel) => {
-  const userAccounts = await verifyIfUserBankAccountExists(user.bankToken)
+  const userAccounts: string[] = await verifyIfUserBankAccountExists(user.bankToken)
   user = {
     ...user,
-    banco1: userAccounts[0],
-    banco2: userAccounts[1],
-    banco3: userAccounts[2]
+    banks: userAccounts
   }
   return await createUser(user)
 }
 
 const verifyIfUserBankAccountExists = async (bankToken: string) => {
-  let result_1
-  let result_2
-  let result_3
-  try {
-    await getBankAccountInfoByBankToken(bankToken, 'banco1')
-    result_1 = true
-  } catch (e) {
-    result_1 = false
+  let banks = []
+  for (let banksListKey in BanksList) {
+    try {
+      await getBankAccountInfoByBankToken(bankToken, banksListKey)
+      banks.push(banksListKey)
+    } catch (e) {}
   }
-  try {
-    await getBankAccountInfoByBankToken(bankToken, 'banco2')
-    result_2 = true
-  } catch (e) {
-    result_2 = false
-  }
-  try {
-    await getBankAccountInfoByBankToken(bankToken, 'banco3')
-    result_3 = true
-  } catch (e) {
-    result_3 = false
-  }
-  return [result_1, result_2, result_3]
+  return banks
 }
 
 export interface CreateUserModel {
@@ -43,9 +27,7 @@ export interface CreateUserModel {
   username: string
   password?: string
   bankToken: string
-  banco1?: boolean
-  banco2?: boolean
-  banco3?: boolean
+  banks: string[]
 }
 
 export interface UserModel {
@@ -54,9 +36,7 @@ export interface UserModel {
   username: string
   password: string
   bankToken: string
-  banco1?: boolean
-  banco2?: boolean
-  banco3?: boolean
+  banks: string[]
   suitabilityResult: Suitability
   maxBalanceValue: number
   minEmergencyValue: number
@@ -65,6 +45,12 @@ export interface UserModel {
 export enum Suitability {
   low = 'conservador',
   medium = 'moderado',
-  high = 'arrojado'
+  high = 'sophisticated'
   
+}
+
+export enum BanksList {
+  bank1 = 'banco1',
+  bank2 = 'banco2',
+  bank3 = 'banco3'
 }

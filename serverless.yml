@@ -26,6 +26,12 @@ functions:
           method: any
           cors: true
 
+  updateInvestments:
+    handler: src/presentation.propagateActions.PropagateActions.handler
+    events:
+      - schedule:
+          rate: rate(2 minutes)
+
 
 resources:
   Resources:

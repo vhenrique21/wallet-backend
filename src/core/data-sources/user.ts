@@ -31,12 +31,10 @@ export const updateUser = async (userInput: UpdateUserModel): Promise<string> =>
   const params = {
     TableName: "WalletUser",
     Key: { "username": userInput.username },
-    UpdateExpression: "set banco1 = :b1, banco2 = :b2, banco3 = :b3, " +
+    UpdateExpression: "set banks = :b," +
       "suitabilityResult = :suit, maxBalanceValue = :max, minEmergencyValue = :min",
     ExpressionAttributeValues: {
-      ":b1": userInput.banco1,
-      ":b2": userInput.banco2,
-      ":b3": userInput.banco3,
+      ":b": userInput.banks,
       ":suit": userInput.suitabilityResult,
       ":max": userInput.maxBalanceValue,
       ":min": userInput.minEmergencyValue
@@ -57,7 +55,16 @@ export const getUserByUsername = async (username: string, _sendPassword: boolean
   }
   const user = await documentClient.get(getUser).promise()
   if (_sendPassword) {
-    return user.Item as UserModel
+    return (user.Item as UserModel)
   }
   return omit(user.Item as UserModel, ['password'])
+}
+
+export const getAllUsers = async () => {
+  const documentClient = new DynamoDB.DocumentClient()
+  const input = {
+    TableName: "WalletUser",
+  }
+  const user = await documentClient.scan(input).promise()
+  return omit(user.Items as UserModel[], ['password'])
 }

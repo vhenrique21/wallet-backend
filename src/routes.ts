@@ -25,14 +25,14 @@ export const buildRouter = () => {
   router.get('/user', verifyAuthByJWT, async (req, res) => { await getUserInfoHandler(req, res) })
   router.put('/user', verifyAuthByJWT, (async (req, res) => { await updateUserHandler(req, res)}))
 
-  // router.get('/user/orders', verifyAuthByJWT, (req, res) => { getUserOrdersHandler(req, res) })
-  // router.post('/user/orders', verifyAuthByJWT, (req, res) => { registerUserOrdersHandler(req, res) })
 
   // Bank Routes
   // router.get('/investment', verifyAuthByJWT, (req, res) => { getInvestmentHandler(req, res) })
   // router.get('/loans', verifyAuthByJWT, (req, res) => { getLoansHandler(req, res) })
 
   router.get('/bank', verifyAuthByJWT, async (req, res) => { await getBankAccountInfoHandler(req, res) })
+  // router.get('/bank/orders', verifyAuthByJWT, (req, res) => { getUserOrdersHandler(req, res) })
+  // router.post('/bank/orders', verifyAuthByJWT, (req, res) => { registerUserOrdersHandler(req, res) })
 
   // router.post('/bank/transfer', verifyAuthByJWT, (req, res) => { makeTransferHandler(req, res) })
   // router.post('/bank/pay', verifyAuthByJWT, (req, res) => { makePaymentHandler(req, res) })
