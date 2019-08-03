@@ -1,1 +1,1 @@
-{"version":3,"file":"getMyBanks.js","sourceRoot":"","sources":["../../../../src/core/use-cases/bank/getMyBanks.ts"],"names":[],"mappings":"AAGA,MAAM,CAAC,MAAM,UAAU,GAAG,CAAC,IAAe,EAAE,EAAE;AAE9C,CAAC,CAAA"}
+{"version":3,"file":"getMyBanks.js","sourceRoot":"","sources":["../../../../src/core/use-cases/bank/getMyBanks.ts"],"names":[],"mappings":"AAGA,MAAM,CAAC,MAAM,UAAU,GAAG,CAAC,IAAqB,EAAE,EAAE;AAEpD,CAAC,CAAA"}

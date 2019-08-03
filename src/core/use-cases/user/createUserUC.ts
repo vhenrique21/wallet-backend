@@ -1,7 +1,7 @@
 import {getBankAccountInfoByBankToken} from '../../data-sources/bank'
 import {createUser} from '../../data-sources/user'
 
-export const CreateUserUC = async (user: UserModel) => {
+export const CreateUserUC = async (user: CreateUserModel) => {
   const userAccounts = await verifyIfUserBankAccountExists(user.bankToken)
   user = {
     ...user,
@@ -37,7 +37,7 @@ const verifyIfUserBankAccountExists = async (bankToken: string) => {
   return [result_1, result_2, result_3]
 }
 
-export interface UserModel {
+export interface CreateUserModel {
   name: string
   email: string
   username: string
@@ -48,8 +48,23 @@ export interface UserModel {
   banco3?: boolean
 }
 
-export interface User {
+export interface UserModel {
   name: string
   email: string
   username: string
+  password: string
+  bankToken: string
+  banco1?: boolean
+  banco2?: boolean
+  banco3?: boolean
+  suitabilityResult: Suitability
+  maxBalanceValue: number
+  minEmergencyValue: number
+}
+
+export enum Suitability {
+  low = 'conservador',
+  medium = 'moderado',
+  high = 'arrojado'
+  
 }

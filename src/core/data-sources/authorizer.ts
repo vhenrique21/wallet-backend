@@ -1,7 +1,7 @@
 // import { DynamoDB } from 'aws-sdk';
 import * as crypto from 'crypto'
 import * as jwt from 'jsonwebtoken'
-import {UserModel} from '../use-cases/user/createUserUC'
+import {CreateUserModel} from '../use-cases/user/createUserUC'
 import {getUserByUsername} from './user'
 
 export const createAuthCredentials = (username: string, password: string) => {
@@ -21,13 +21,13 @@ export const verifyAuthByJWT = (req, res, next)  => {
 }
 
 
-export const authorizeByCredentials = async (username: string, password: string): Promise<string> => {
+export const authorizeByCredentials = async (username: string, password: string): Promise<string[]> => {
   const hash = createHash(password)
-  const user: UserModel = await getUserByUsername(username, true)
+  const user: CreateUserModel = await getUserByUsername(username, true)
   if (user.password !== hash) {
     throw new Error('Incorrect username or password')
   }
-  return createAuthCredentials(username, hash)
+  return [createAuthCredentials(username, hash), user.bankToken]
 }
 
 // export const authorizeByToken = async (token: string): Promise<string> => {

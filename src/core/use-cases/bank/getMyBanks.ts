@@ -1,6 +1,6 @@
-import {UserModel} from '../user/createUserUC'
+import {CreateUserModel} from '../user/createUserUC'
 
 
-export const GetMyBanks = (user: UserModel) => {
+export const GetMyBanks = (user: CreateUserModel) => {
 
 }

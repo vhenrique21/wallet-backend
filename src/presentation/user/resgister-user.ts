@@ -1,5 +1,5 @@
 import {getUserByUsername} from '../../core/data-sources/user'
-import {UserModel, CreateUserUC} from '../../core/use-cases/user/createUserUC'
+import {CreateUserModel, CreateUserUC} from '../../core/use-cases/user/createUserUC'
 const Joi = require('@hapi/joi')
 
 export async function signupHandler(req, res) {
@@ -24,7 +24,7 @@ export async function signupHandler(req, res) {
       return res.status(401).send({message: 'This user already exists'})
     }
 
-    const user = await CreateUserUC(req.body as UserModel)
+    const user = await CreateUserUC(req.body as CreateUserModel)
     return res.status(200).send(user)
   } catch (e) {
     return res.status(500).send(e.message)
