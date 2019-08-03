@@ -8,7 +8,7 @@ plugins:
 provider:
   stage: ${opt:stage, 'dev'}
   timeout: 30
-  memorySize: 128
+  memorySize: 1024
   name: aws
   runtime: nodejs8.10
   iamRoleStatements:
@@ -24,13 +24,26 @@ functions:
       - http:
           path: /{proxy+}
           method: any
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agen
+              - x-access-token
 
   updateInvestments:
-    handler: src/presentation.propagateActions.PropagateActions.handler
+    handler: src/presentation/propagateActions/PropagateActions.handler
     events:
       - schedule:
-          rate: rate(2 minutes)
+          rate: rate(6 hours)
+      - http:
+          path: /propagateAction
+          method: GET
+          cors: true
 
 
 resources:

@@ -16,7 +16,7 @@ const verifyIfUserBankAccountExists = async (bankToken: string) => {
     try {
       await getBankAccountInfoByBankToken(bankToken, banksListKey)
       banks.push(banksListKey)
-    } catch (e) {}
+    } catch (e) {console.log(e)}
   }
   return banks
 }
@@ -27,7 +27,7 @@ export interface CreateUserModel {
   username: string
   password?: string
   bankToken: string
-  banks: string[]
+  banks?: string[]
 }
 
 export interface UserModel {
@@ -50,7 +50,7 @@ export enum Suitability {
 }
 
 export enum BanksList {
-  bank1 = 'banco1',
-  bank2 = 'banco2',
-  bank3 = 'banco3'
+  banco1 = 'banco1',
+  banco2 = 'banco2',
+  banco3 = 'banco3'
 }

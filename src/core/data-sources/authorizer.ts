@@ -15,7 +15,7 @@ export const verifyAuthByJWT = (req, res, next)  => {
   jwt.verify(token, 'batman batman batman', function(err, decoded) {
     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' })
     // se tudo estiver ok, salva no request para uso posterior
-    req.username = decoded.id
+    req.username = decoded.username
     next()
   });
 }

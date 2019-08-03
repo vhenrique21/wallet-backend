@@ -26,6 +26,7 @@
     "node-fetch": "latest",
     "osdynamo": "latest",
     "path-to-regexp": "latest",
+    "ramda": "^0.26.1",
     "request": "^2.88.0",
     "request-promise": "latest",
     "serverless": "latest",
@@ -43,9 +44,10 @@
     "@types/aws-lambda": "latest",
     "@types/aws-serverless-express": "latest",
     "@types/express": "latest",
+    "@types/hapi__joi": "^15.0.3",
     "@types/node": "^8.10.51",
-    "@types/node-fetch": "latest",
-    "@types/hapi__joi": "^15.0.3"
+    "@types/node-fetch": "latest"
+
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
   "license": "MIT"

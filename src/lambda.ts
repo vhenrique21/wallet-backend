@@ -4,7 +4,7 @@ import {APIGatewayEvent, Context, Handler} from 'aws-lambda'
 import * as awsServerlessExpress from 'aws-serverless-express'
 import app from './app'
 
-  ;(global as any).fetch = require('node-fetch').default
+  // ;(global as any).fetch = require('node-fetch').default
 
 const server = awsServerlessExpress.createServer(app)
 
